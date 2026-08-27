@@ -1,0 +1,9 @@
+{
+  "name": "campus-issue-tracker",
+  "version": "1.0.0",
+  "description": "A small full-stack web application for reporting and tracking campus issues.",
+  "scripts": {
+    "start:frontend": "npm run dev --prefix frontend",
+    "start:backend": "npm start --prefix backend"
+  }
+}
