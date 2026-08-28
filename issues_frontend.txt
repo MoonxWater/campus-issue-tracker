@@ -1,0 +1,35 @@
+# Frontend Recommendations & API Details
+
+The backend has been upgraded with core CRUD API endpoints for managing Campus Issues. Please ensure the frontend aligns with the new data models.
+
+## API Endpoints (`/api/issues`)
+- `POST /api/issues/`: Create an issue.
+  - Body: `{ title: string, description: string, location: string, category: string (optional, defaults to "General") }`
+- `GET /api/issues/`: Retrieve a list of all issues.
+  - Optional Query Params: `?status={status}&category={category}`
+- `GET /api/issues/{id}`: Retrieve details for a specific issue by its ID.
+- `PUT /api/issues/{id}`: Update an issue.
+  - Body: Can include partial updates for `title`, `description`, `location`, `category`, `status`, or `priority`.
+- `DELETE /api/issues/{id}`: Delete an issue by ID.
+
+## Data Models
+The standard `IssueResponse` structure returned by the API will look like:
+```json
+{
+  "id": "6472d8a4e4b0e8c71b6982fa",
+  "title": "Broken elevator in library",
+  "description": "The main elevator on the ground floor is out of service.",
+  "location": "Main Library",
+  "category": "Maintenance",
+  "status": "Open",
+  "priority": "Normal",
+  "created_at": "2023-05-28T12:00:00Z",
+  "updated_at": "2023-05-28T12:00:00Z"
+}
+```
+
+## Recommendations
+1. Integrate Axios or the native `fetch` API to communicate with `http://localhost:5000/api/issues`.
+2. Add a global state manager (like Redux, Zustand, or React Context) or data-fetching library (like React Query) for smooth management of issue data across components.
+3. Build a Dashboard page fetching issues using `GET /api/issues/`.
+4. Build a form component for issue submission, targeting `POST /api/issues/`.
