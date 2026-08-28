@@ -8,3 +8,18 @@ Based on the API contract in `issues_frontend.txt`, here are a few suggestions t
    - Add sorting capabilities (e.g., sort by `created_at` descending).
 3. **CORS**: Ensure that CORS (Cross-Origin Resource Sharing) is configured on the backend so the frontend can successfully make requests from `localhost` during development and from the production domain later.
 4. **Error Handling**: Standardize the error response format (e.g., `{ error: "Message", code: 400 }`) so the frontend can display meaningful error messages to users.
+
+---
+
+# Backend Suggestions from Frontend Dev 2
+
+Based on the API client and service structure implementation:
+
+1. **Health Check Endpoint**:
+   - Introduce a lightweight `GET /api/health` endpoint so the frontend services can verify backend connectivity and readiness during development and startup.
+2. **Validation & Field Constraints**:
+   - Provide clear validation error responses detailing exact invalid fields (e.g., `{ error: "Validation Error", details: { title: "Title is required" } }`).
+3. **Status Transitions & Allowed Enums**:
+   - Clearly define and validate allowed status values (`Open`, `In Progress`, `Resolved`, `Closed`) and priority levels (`Low`, `Normal`, `High`, `Urgent`).
+4. **Search Capability**:
+   - Consider supporting a text search query parameter (e.g., `GET /api/issues?search=elevator`) to allow the frontend issue search bar to filter issues by title and description efficiently.
