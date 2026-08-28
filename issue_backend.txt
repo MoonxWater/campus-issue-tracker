@@ -1,0 +1,10 @@
+# Backend Suggestions from Frontend Dev 1
+
+Based on the API contract in `issues_frontend.txt`, here are a few suggestions to improve the backend for scalability and frontend consumption:
+
+1. **Pagination**: For the `GET /api/issues/` endpoint, consider adding pagination (e.g., `?page=1&limit=10`). As the number of issues grows, returning all issues at once will impact performance.
+2. **Filtering & Sorting**: 
+   - Add filtering by `priority` along with the existing `status` and `category` filters.
+   - Add sorting capabilities (e.g., sort by `created_at` descending).
+3. **CORS**: Ensure that CORS (Cross-Origin Resource Sharing) is configured on the backend so the frontend can successfully make requests from `localhost` during development and from the production domain later.
+4. **Error Handling**: Standardize the error response format (e.g., `{ error: "Message", code: 400 }`) so the frontend can display meaningful error messages to users.
