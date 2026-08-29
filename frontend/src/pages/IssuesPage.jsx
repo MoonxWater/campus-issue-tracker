@@ -7,11 +7,12 @@ const IssuesPage = () => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchIssues = async () => {
+  const fetchIssues = async (searchQuery = '') => {
     try {
       setLoading(true);
-      const data = await issueService.getIssues();
+      const data = await issueService.getIssues({ search: searchQuery });
       // Ensure we always have an array
       setIssues(Array.isArray(data) ? data : (data.issues || []));
       setError(null);
@@ -34,8 +35,12 @@ const IssuesPage = () => {
   };
 
   useEffect(() => {
-    fetchIssues();
-  }, []);
+    const delayDebounceFn = setTimeout(() => {
+      fetchIssues(searchTerm);
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
 
   const getStatusBadge = (status) => {
     const s = (status || '').toLowerCase();
@@ -47,7 +52,7 @@ const IssuesPage = () => {
 
   return (
     <div className="page issues-page">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6">
         <div>
           <h1 style={{ marginBottom: '8px' }}>Issue Dashboard</h1>
           <p style={{ margin: 0 }}>Track and manage all campus facility and IT reports.</p>
@@ -56,6 +61,17 @@ const IssuesPage = () => {
           <Plus size={18} />
           Report Issue
         </Link>
+      </div>
+
+      <div className="mb-8">
+        <input 
+          type="text" 
+          placeholder="Search issues by title, description, or location..." 
+          className="form-input" 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ maxWidth: '600px' }}
+        />
       </div>
 
       {error && (
