@@ -11,7 +11,10 @@ app = FastAPI(title="Campus Issue Tracker API")
 # Configure CORS so the React frontend can communicate with the API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Adjust in production
+    allow_origins=[
+        "http://localhost:5173",
+        "https://campus-issue-tracker-pi.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
