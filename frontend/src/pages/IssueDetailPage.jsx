@@ -115,7 +115,7 @@ const IssueDetailPage = () => {
           </div>
         </div>
 
-        <div className="flex gap-8 mb-8" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '24px' }}>
+        <div className="flex gap-16 flex-wrap mb-8" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '24px' }}>
           <div className="flex items-center gap-3">
             <div style={{ background: 'var(--background-color)', padding: '10px', borderRadius: '8px' }}>
               <MapPin size={20} style={{ color: 'var(--primary-color)' }} />

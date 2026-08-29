@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import { HomePage, IssuesPage, IssueDetailPage, CreateIssuePage, NotFoundPage, AdminLoginPage, EditIssuePage } from './pages';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 /**
@@ -24,6 +25,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
+      <Analytics />
     </Router>
   );
 }
