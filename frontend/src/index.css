@@ -281,3 +281,53 @@ a:hover {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--spacing-xl);
 }
+
+/* Responsive Utilities */
+.flex-responsive {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .main-content {
+    padding: var(--spacing-md);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .header-container {
+    flex-direction: column;
+    height: auto !important;
+    padding: var(--spacing-sm) 0;
+    gap: var(--spacing-md);
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .flex-responsive {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .card {
+    padding: var(--spacing-md);
+  }
+  
+  h1 {
+    font-size: 24px !important;
+  }
+  
+  .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+}
