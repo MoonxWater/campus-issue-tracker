@@ -57,8 +57,8 @@ const IssuesPage = () => {
           <h1 style={{ marginBottom: '8px' }}>Issue Dashboard</h1>
           <p style={{ margin: 0 }}>Track and manage all campus facility and IT reports.</p>
         </div>
-        <Link to="/create-issue" className="btn btn-primary">
-          <Plus size={18} />
+        <Link to="/create-issue" className="btn btn-primary btn-md">
+          <Plus size={18} style={{ marginRight: '4px' }} />
           Report Issue
         </Link>
       </div>
@@ -91,34 +91,64 @@ const IssuesPage = () => {
         <div className="card text-center" style={{ padding: '60px 20px' }}>
           <h3 style={{ margin: '0 0 10px 0' }}>No issues found</h3>
           <p>Everything looks good on campus! Or you can be the first to report something.</p>
-          <Link to="/create-issue" className="btn btn-primary mt-4">Report an Issue</Link>
+          <Link to="/create-issue" className="btn btn-primary btn-md mt-4">Report an Issue</Link>
         </div>
       ) : (
         <div className="grid">
-          {issues.map(issue => (
-            <Link to={`/issues/${issue.id || issue._id}`} key={issue.id || issue._id} className="card flex flex-col" style={{ color: 'inherit' }}>
-              <div className="flex justify-between items-center mb-4">
-                {getStatusBadge(issue.status)}
-                <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600 }}>{issue.priority || 'Normal'} Priority</span>
-              </div>
-              
-              <h3 style={{ fontSize: '18px', marginBottom: '8px', marginTop: 0 }}>{issue.title}</h3>
-              <p style={{ fontSize: '14px', flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                {issue.description}
-              </p>
-              
-              <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px', marginTop: '16px' }}>
-                <div className="flex items-center gap-2 mb-2" style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-                  <MapPin size={14} />
-                  <span>{issue.location}</span>
+          {issues.map(issue => {
+            const issueId = issue.id || issue._id;
+            return (
+            <div key={issueId} className="card flex flex-col relative">
+              <Link to={`/issues/${issueId}`} style={{ color: 'inherit', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <div className="flex justify-between items-center mb-4">
+                  {getStatusBadge(issue.status)}
+                  <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600 }}>{issue.priority || 'Normal'} Priority</span>
                 </div>
-                <div className="flex items-center gap-2" style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-                  <Clock size={14} />
-                  <span>{new Date(issue.created_at).toLocaleDateString()}</span>
+                
+                <h3 style={{ fontSize: '18px', marginBottom: '8px', marginTop: 0 }}>{issue.title}</h3>
+                <p style={{ fontSize: '14px', flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  {issue.description}
+                </p>
+                
+                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px', marginTop: '16px' }}>
+                  <div className="flex items-center gap-2 mb-2" style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+                    <MapPin size={14} />
+                    <span>{issue.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2" style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+                    <Clock size={14} />
+                    <span>{new Date(issue.created_at).toLocaleDateString()}</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+              
+              {localStorage.getItem('adminPassword') && (
+                <div className="flex gap-2 mt-4 pt-4" style={{ borderTop: '1px solid var(--border-color)' }}>
+                  <Link to={`/issues/${issueId}/edit`} className="btn btn-outline btn-sm w-full">
+                    Edit
+                  </Link>
+                  <button 
+                    onClick={async (e) => {
+                      e.preventDefault(); // Prevent link click
+                      if (window.confirm('Are you sure you want to delete this issue?')) {
+                        try {
+                          await issueService.deleteIssue(issueId);
+                          // Optimistic UI update for snappy feel
+                          setIssues(prev => prev.filter(i => (i.id || i._id) !== issueId));
+                        } catch (err) {
+                          alert(err.message || 'Failed to delete issue');
+                        }
+                      }
+                    }} 
+                    className="btn btn-danger btn-sm w-full" 
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
+            );
+          })}
         </div>
       )}
     </div>

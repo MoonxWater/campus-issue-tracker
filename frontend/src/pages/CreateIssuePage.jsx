@@ -140,11 +140,11 @@ const CreateIssuePage = () => {
             ></textarea>
           </div>
 
-          <div className="flex justify-between items-center">
-            <button type="button" onClick={() => navigate(-1)} className="btn btn-outline" disabled={loading}>
+          <div className="flex justify-between items-center mt-6">
+            <button type="button" onClick={() => navigate(-1)} className="btn btn-outline btn-md" disabled={loading}>
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary" disabled={loading}>
+            <button type="submit" className="btn btn-primary btn-md" disabled={loading}>
               {loading ? 'Submitting...' : 'Submit Report'}
             </button>
           </div>

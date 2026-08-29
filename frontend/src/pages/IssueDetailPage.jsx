@@ -58,7 +58,7 @@ const IssueDetailPage = () => {
       <div className="card text-center" style={{ padding: '60px 20px', maxWidth: '600px', margin: '0 auto' }}>
         <h3 style={{ color: 'var(--danger-color)' }}>Error</h3>
         <p>{error || 'Issue not found'}</p>
-        <button onClick={() => navigate('/issues')} className="btn btn-primary mt-4">Back to Issues</button>
+        <button onClick={() => navigate('/issues')} className="btn btn-primary btn-md mt-4">Back to Issues</button>
       </div>
     );
   }
@@ -92,7 +92,7 @@ const IssueDetailPage = () => {
             
             {localStorage.getItem('adminPassword') && (
               <div className="flex gap-2 mt-4">
-                <Link to={`/issues/${id}/edit`} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '13px' }}>
+                <Link to={`/issues/${id}/edit`} className="btn btn-outline btn-sm">
                   Edit
                 </Link>
                 <button 
@@ -106,8 +106,7 @@ const IssueDetailPage = () => {
                       }
                     }
                   }} 
-                  className="btn" 
-                  style={{ padding: '6px 12px', fontSize: '13px', background: 'var(--danger-color)', color: 'white' }}
+                  className="btn btn-danger btn-sm" 
                 >
                   Delete
                 </button>
