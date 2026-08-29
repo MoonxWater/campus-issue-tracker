@@ -27,7 +27,7 @@ const HomePage = () => {
         </Link>
       </div>
       
-      <div className="grid mt-8" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', maxWidth: '1000px', textAlign: 'left' }}>
+      <div className="grid mt-8" style={{ gap: '2rem', maxWidth: '1000px', textAlign: 'left', width: '100%' }}>
         <div className="card">
           <ShieldAlert size={32} style={{ color: 'var(--danger-color)', marginBottom: '1rem' }} />
           <h3>Fast Reporting</h3>
