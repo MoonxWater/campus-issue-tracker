@@ -182,11 +182,11 @@ const EditIssuePage = () => {
             ></textarea>
           </div>
 
-          <div className="flex justify-between items-center">
-            <button type="button" onClick={() => navigate(-1)} className="btn btn-outline" disabled={saving}>
+          <div className="flex justify-between items-center mt-6">
+            <button type="button" onClick={() => navigate(-1)} className="btn btn-outline btn-md" disabled={saving}>
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary" disabled={saving}>
+            <button type="submit" className="btn btn-primary btn-md" disabled={saving}>
               {saving ? 'Saving...' : 'Save Changes'}
             </button>
           </div>

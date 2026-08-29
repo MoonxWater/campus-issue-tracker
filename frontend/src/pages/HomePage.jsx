@@ -18,12 +18,12 @@ const HomePage = () => {
         Spotted a broken elevator, a leaky pipe, or internet downtime? Report it instantly and track the resolution progress in real-time.
       </p>
       
-      <div className="flex items-center gap-4 mb-8">
-        <Link to="/create-issue" className="btn btn-primary" style={{ padding: '14px 28px', fontSize: '16px' }}>
+      <div className="flex justify-center gap-4 flex-wrap">
+        <Link to="/create-issue" className="btn btn-primary btn-lg">
           Report an Issue
         </Link>
-        <Link to="/issues" className="btn btn-outline" style={{ padding: '14px 28px', fontSize: '16px' }}>
-          View Dashboard
+        <Link to="/issues" className="btn btn-outline btn-lg">
+          View Issues
         </Link>
       </div>
       

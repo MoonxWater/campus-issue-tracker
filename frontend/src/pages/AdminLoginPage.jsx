@@ -45,7 +45,7 @@ const AdminLoginPage = () => {
               autoFocus
             />
           </div>
-          <button type="submit" className="btn btn-primary w-full">
+          <button type="submit" className="btn btn-primary btn-md w-full">
             Login
           </button>
         </form>
