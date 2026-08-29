@@ -8,10 +8,6 @@ const IssuesPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchIssues();
-  }, []);
-
   const fetchIssues = async () => {
     try {
       setLoading(true);
@@ -36,6 +32,10 @@ const IssuesPage = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchIssues();
+  }, []);
 
   const getStatusBadge = (status) => {
     const s = (status || '').toLowerCase();
