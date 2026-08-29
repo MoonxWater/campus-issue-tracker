@@ -5,14 +5,14 @@ from src.controllers import issue_controller
 
 router = APIRouter(prefix="/api/issues", tags=["Issues"])
 
-@router.post("/", response_model=IssueResponse, status_code=201)
+@router.post("", response_model=IssueResponse, status_code=201)
 def create_issue(issue: IssueCreate):
     created_issue = issue_controller.create_issue(issue)
     if not created_issue:
         raise HTTPException(status_code=500, detail="Failed to create issue")
     return created_issue
 
-@router.get("/", response_model=List[IssueResponse])
+@router.get("", response_model=List[IssueResponse])
 def get_issues(
     status: Optional[str] = Query(None, description="Filter by status"),
     category: Optional[str] = Query(None, description="Filter by category")

@@ -7,6 +7,7 @@ class IssueBase(BaseModel):
     description: str
     location: str
     category: str = Field(default="General")
+    priority: Optional[str] = Field(default="Normal")
 
 class IssueCreate(IssueBase):
     pass

@@ -18,7 +18,8 @@ def create_issue(issue_data: IssueCreate):
     
     # Add default fields
     issue_dict["status"] = "Open"
-    issue_dict["priority"] = "Normal"
+    if "priority" not in issue_dict or not issue_dict["priority"]:
+        issue_dict["priority"] = "Normal"
     issue_dict["created_at"] = datetime.now(timezone.utc)
     issue_dict["updated_at"] = issue_dict["created_at"]
     
