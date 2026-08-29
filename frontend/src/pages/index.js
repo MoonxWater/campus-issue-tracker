@@ -9,3 +9,5 @@ export { default as IssuesPage } from './IssuesPage';
 export { default as IssueDetailPage } from './IssueDetailPage';
 export { default as CreateIssuePage } from './CreateIssuePage';
 export { default as NotFoundPage } from './NotFoundPage';
+export { default as AdminLoginPage } from './AdminLoginPage';
+export { default as EditIssuePage } from './EditIssuePage';

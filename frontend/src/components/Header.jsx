@@ -53,6 +53,20 @@ const Header = () => {
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           
+          {localStorage.getItem('adminPassword') ? (
+            <button 
+              onClick={() => { localStorage.removeItem('adminPassword'); window.location.reload(); }}
+              className="btn btn-outline" 
+              style={{ padding: '6px 12px', fontSize: '13px' }}
+            >
+              Admin Logout
+            </button>
+          ) : (
+            <Link to="/admin" className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '13px', textDecoration: 'none' }}>
+              Admin Login
+            </Link>
+          )}
+          
           <Link to="/create-issue" className="btn btn-primary" style={{ marginLeft: '8px' }}>
             <Plus size={18} />
             <span>Report Issue</span>

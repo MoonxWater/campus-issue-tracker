@@ -89,6 +89,30 @@ const IssueDetailPage = () => {
               <Clock size={16} />
               <span>{new Date(issue.created_at).toLocaleTimeString()}</span>
             </div>
+            
+            {localStorage.getItem('adminPassword') && (
+              <div className="flex gap-2 mt-4">
+                <Link to={`/issues/${id}/edit`} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '13px' }}>
+                  Edit
+                </Link>
+                <button 
+                  onClick={async () => {
+                    if (window.confirm('Are you sure you want to delete this issue?')) {
+                      try {
+                        await issueService.deleteIssue(id);
+                        navigate('/issues');
+                      } catch (err) {
+                        alert(err.message || 'Failed to delete issue');
+                      }
+                    }
+                  }} 
+                  className="btn" 
+                  style={{ padding: '6px 12px', fontSize: '13px', background: 'var(--danger-color)', color: 'white' }}
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

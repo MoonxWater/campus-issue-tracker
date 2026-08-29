@@ -29,7 +29,7 @@ def create_issue(issue_data: IssueCreate):
     created_issue = db.issues.find_one({"_id": result.inserted_id})
     return serialize_issue(created_issue)
 
-def get_all_issues(status: str = None, category: str = None):
+def get_all_issues(status: str = None, category: str = None, search: str = None):
     if db is None:
         raise Exception("Database not initialized")
         
@@ -38,6 +38,14 @@ def get_all_issues(status: str = None, category: str = None):
         query["status"] = status
     if category:
         query["category"] = category
+    if search:
+        # Use regex to search case-insensitively across title, description, and location
+        search_regex = {"$regex": search, "$options": "i"}
+        query["$or"] = [
+            {"title": search_regex},
+            {"description": search_regex},
+            {"location": search_regex}
+        ]
         
     issues = db.issues.find(query).sort("created_at", -1)
     return [serialize_issue(issue) for issue in issues]

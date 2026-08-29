@@ -45,11 +45,14 @@ export async function request(endpoint, options = {}) {
     }
   }
 
+  const adminPassword = localStorage.getItem('adminPassword');
+  
   const config = {
     method: customConfig.method || 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      ...(adminPassword ? { 'X-Admin-Password': adminPassword } : {}),
       ...headers,
     },
     ...customConfig,
