@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import { HomePage, IssuesPage, IssueDetailPage, CreateIssuePage, NotFoundPage } from './pages';
 import './App.css';
@@ -9,42 +10,19 @@ import './App.css';
  * Provides layout wrapping and route resolution foundation for the Campus Issue Tracker.
  */
 function App() {
-  const [currentPath, setCurrentPath] = useState(
-    typeof window !== 'undefined' ? window.location.pathname : '/'
-  );
-
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
-
-    window.addEventListener('popstate', handleLocationChange);
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-    };
-  }, []);
-
-  // Simple, robust client-side routing resolution
-  const renderRoute = () => {
-    if (currentPath === '/' || currentPath === '') {
-      return <HomePage />;
-    }
-    if (currentPath === '/issues') {
-      return <IssuesPage />;
-    }
-    if (currentPath.startsWith('/issues/')) {
-      return <IssueDetailPage />;
-    }
-    if (currentPath === '/create-issue' || currentPath === '/report') {
-      return <CreateIssuePage />;
-    }
-    return <NotFoundPage />;
-  };
-
   return (
-    <Layout>
-      {renderRoute()}
-    </Layout>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/issues" element={<IssuesPage />} />
+          <Route path="/issues/:id" element={<IssueDetailPage />} />
+          <Route path="/create-issue" element={<CreateIssuePage />} />
+          <Route path="/report" element={<CreateIssuePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
