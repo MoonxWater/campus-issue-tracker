@@ -88,7 +88,7 @@ const CreateIssuePage = () => {
             />
           </div>
 
-          <div className="flex gap-4 mb-4">
+          <div className="flex-responsive">
             <div className="form-group w-full">
               <label className="form-label" htmlFor="category">Category</label>
               <select 
