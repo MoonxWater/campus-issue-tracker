@@ -97,6 +97,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .main-content {
@@ -264,7 +265,7 @@ a:hover {
   background: var(--surface-color);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  font-size: 15px;
+  font-size: 16px; /* Prevents auto-zoom on iOS */
   font-family: inherit;
   color: var(--text-color);
   transition: all 0.2s ease;
